@@ -7,27 +7,23 @@ let desMod;
 let slider;
 
 function setup() {
-  createCanvas(400, 400, WEBGL);
+  createCanvas(windowWidth, round(windowHeight * 0.75));
   angleMode(DEGREES)
-  x = width / 2;
+  x = round(windowWidth / 2);
   y = height;
+  print(y, windowHeight, height);
   angle = 90;
   initDes = 100;
   desMod = createSlider(0, 0.76, 0.7, 0.01);
   angleMod = createSlider(0, 180);
   stroke(0);
-  //noLoop();
-  
-  //slider = createSlider(0, 180);
-  angleMod.size(100);
-  desMod.size(100);
+  angleMod.size(300);
+  desMod.size(300);
 }
 
 function draw() {
-  translate(-height/2,-width/2)
   background(255);
-  //line(x, 0, x, y + 100);
-   arvore(x, y, initDes, angle);
+  arvore(x, y, initDes, angle);
 }
 
 function arvore(initX, initY, des, angle) {
@@ -40,6 +36,7 @@ function arvore(initX, initY, des, angle) {
   else if(des === initDes){
     finalX = initX;
     finalY = initY - des;
+    //print(initY, finalY)
   }
   else {
     finalX = initX - cos(angle) * des;
@@ -58,4 +55,9 @@ function leaf(initX, initY, des, angle) {
   bezier(initX, initY, initX, finalY, initX, finalY, finalX, finalY);
   bezier(initX, initY, finalX, initY, finalX, initY, finalX, finalY);
   line(initX, initY, finalX, finalY);
+}
+
+function windowResized(){
+  x = round(windowWidth / 2);
+  y = height;
 }
